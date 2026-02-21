@@ -45,6 +45,7 @@ IMPLEMENTATION_PLAN.md
 
 # Screenshots (development artifacts)
 *.png
+!public/**/*.png
 
 # Vercel
 .vercel
