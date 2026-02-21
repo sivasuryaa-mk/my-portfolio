@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Briefcase, MapPin, Calendar, Building2 } from "lucide-react";
+import Image from "next/image";
 import { experience } from "@/data/portfolio-content";
 import { SplitText } from "@/components/ui/SplitText";
 
@@ -177,9 +178,10 @@ function TimelineCard({
   exp,
   index,
 }: {
-  exp: (typeof experience)[0];
+  exp: (typeof experience)[0] & { logo?: string };
   index: number;
 }) {
+  const [logoError, setLogoError] = useState(false);
   const colorVariants = ["primary", "secondary", "tertiary"] as const;
   const color = colorVariants[index % 3];
 
@@ -214,18 +216,35 @@ function TimelineCard({
       {/* Header */}
       <div className="relative mb-4">
         <div className="flex flex-wrap items-start justify-between gap-2">
-          <div>
-            <h3 className="font-display text-xl font-bold text-text-primary">
-              {exp.role}
-            </h3>
-            <div className="mt-1 flex items-center gap-2 text-text-secondary">
-              <Building2 className="h-4 w-4" />
-              <span className="font-medium">{exp.company}</span>
-              {exp.companyDescription && (
-                <span className="text-sm text-text-secondary/70">
-                  ({exp.companyDescription})
-                </span>
-              )}
+          <div className="flex items-start gap-3">
+            {/* Company Logo */}
+            {exp.logo && !logoError ? (
+              <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-lg bg-white/10">
+                <Image
+                  src={exp.logo}
+                  alt={`${exp.company} logo`}
+                  fill
+                  className="object-contain p-1"
+                  onError={() => setLogoError(true)}
+                />
+              </div>
+            ) : (
+              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg bg-white/10">
+                <Building2 className="h-6 w-6 text-text-secondary" />
+              </div>
+            )}
+            <div>
+              <h3 className="font-display text-xl font-bold text-text-primary">
+                {exp.role}
+              </h3>
+              <div className="mt-1 flex items-center gap-2 text-text-secondary">
+                <span className="font-medium">{exp.company}</span>
+                {exp.companyDescription && (
+                  <span className="text-sm text-text-secondary/70">
+                    ({exp.companyDescription})
+                  </span>
+                )}
+              </div>
             </div>
           </div>
           <span className={`rounded-full px-3 py-1 text-xs font-medium ${badgeColors[color]}`}>

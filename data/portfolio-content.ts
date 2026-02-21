@@ -12,7 +12,7 @@ export const personalInfo = {
   email: "sivasuryaa2004@gmail.com", 
   linkedin: "https://www.linkedin.com/in/sivasuryaa-m-k/",
   github: "https://github.com/sivasuryaa-mk/",
-  bio: "Software Engineer at Gen Digital specializing in macOS development. CSE graduate from College of Engineering, Guindy with expertise in Swift, Python, and AI/ML. Passionate about building innovative applications and exploring cutting-edge technologies like LangChain and Prompt Engineering.",
+  bio: "Currently working as a macOS Engineer at Gen Digital, specializing in Swift development. A CSE graduate from College of Engineering, Guindy, I'm passionate about building end-to-end applications using AI and exploring cutting-edge tools like Claude Code, Cursor, and more.",
 };
 
 export const education = [
@@ -54,6 +54,7 @@ export const experience = [
       "Contributing to Gen Digital's security and privacy software products",
     ],
     technologies: ["Swift", "macOS", "Python"],
+    logo: "/assets/logos/gen-digital.png",
   },
   {
     role: "Software Engineering Intern",
@@ -70,6 +71,7 @@ export const experience = [
       "Applied Python for backend services and automation",
     ],
     technologies: ["Swift", "Python", "LangChain", "Prompt Engineering", "Artificial Intelligence"],
+    logo: "/assets/logos/gen-digital.png",
   },
   {
     role: "Research Intern",
@@ -85,6 +87,7 @@ export const experience = [
       "Performed comprehensive analysis on the impact of various features on mortality rates using MIMIC IV dataset and chest X-ray embeddings (CXR)",
     ],
     technologies: ["Python", "Machine Learning", "Data Analysis", "Medical Imaging"],
+    logo: "/assets/logos/ceg.png",
   },
 ];
 
@@ -320,12 +323,29 @@ export const socialLinks = [
   },
 ];
 
+// Hobbies
+export const hobbies = [
+  {
+    name: "Reading Books",
+    description: "Passionate about self-development and personal growth",
+    category: "Self-Development",
+    icon: "BookOpen",
+  },
+  {
+    name: "Listening to Music",
+    description: "Finding inspiration through various music genres",
+    category: "Leisure",
+    icon: "Music",
+  },
+];
+
 // Navigation items
 export const navItems = [
-  { name: "Home", href: "#hero" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "Experience", href: "#experience" },
-  { name: "Activities", href: "#activities" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "#hero", icon: "Home" },
+  { name: "Projects", href: "#projects", icon: "FolderKanban" },
+  { name: "Skills", href: "#skills", icon: "Code2" },
+  { name: "Experience", href: "#experience", icon: "Briefcase" },
+  { name: "Activities", href: "#activities", icon: "Users" },
+  { name: "Hobbies", href: "#hobbies", icon: "Heart" },
+  { name: "Contact", href: "#contact", icon: "Mail" },
 ];

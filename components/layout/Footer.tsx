@@ -111,6 +111,7 @@ export function Footer() {
           <p className="flex items-center gap-1 text-sm text-text-secondary/70">
             &copy; {currentYear} {personalInfo.name.split(" ")[0]}. Made with
             <Heart className="h-4 w-4 text-red-500" />
+            in Chennai
           </p>
 
           {/* Back to top */}

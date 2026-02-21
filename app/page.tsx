@@ -1,15 +1,17 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import dynamic from "next/dynamic";
 import { personalInfo } from "@/data/portfolio-content";
-import { SplitText, TextReveal } from "@/components/ui/SplitText";
+import { RollingText } from "@/components/ui/RollingText";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { Projects } from "@/components/sections/Projects";
 import { Skills } from "@/components/sections/Skills";
 import { Experience } from "@/components/sections/Experience";
 import { Activities } from "@/components/sections/Activities";
+import { Hobbies } from "@/components/sections/Hobbies";
 import { Contact } from "@/components/sections/Contact";
 import { Footer } from "@/components/layout/Footer";
 
@@ -27,8 +29,17 @@ const scrollToSection = (id: string) => {
 };
 
 export default function Home() {
+  const [showRoles, setShowRoles] = useState(false);
+  const roles = ["Swift Developer", "AI Engineer"];
+
+  useEffect(() => {
+    // Show roles after name animation settles
+    const timer = setTimeout(() => setShowRoles(true), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen md:pl-20">
       {/* Hero Section */}
       <section
         id="hero"
@@ -56,29 +67,33 @@ export default function Home() {
             </p>
           </motion.div>
 
-          {/* Main heading with split text animation */}
+          {/* Main heading with shimmer effect */}
           <h1 className="mb-6 font-display text-5xl font-bold leading-tight md:text-7xl lg:text-8xl">
-            <TextReveal delay={0.3}>
-              <span>Hi, I&apos;m </span>
-              <SplitText
-                text={personalInfo.name.split(" ")[0]}
-                delay={0.5}
-                staggerDelay={0.04}
-                animation="fadeUp"
-                gradient
-              />
-            </TextReveal>
-            <TextReveal delay={0.5}>
-              <span className="block text-4xl md:text-5xl lg:text-6xl">
-                <SplitText
-                  text={personalInfo.tagline}
-                  delay={0.7}
-                  staggerDelay={0.02}
-                  type="words"
-                  animation="slideUp"
-                />
-              </span>
-            </TextReveal>
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              Hi, I&apos;m{" "}
+            </motion.span>
+            <motion.span
+              className="inline-block shimmer-text"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {personalInfo.name.split(" ")[0]}
+            </motion.span>
+            {showRoles && (
+              <motion.span
+                className="block mt-6 text-3xl md:text-4xl lg:text-5xl"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+              >
+                <RollingText texts={roles} delay={0.2} typingSpeed={70} pauseDuration={2500} className="text-accent-tertiary font-semibold" />
+              </motion.span>
+            )}
           </h1>
 
           {/* Bio */}
@@ -153,6 +168,9 @@ export default function Home() {
 
       {/* Activities & Volunteering Section */}
       <Activities />
+
+      {/* Hobbies Section */}
+      <Hobbies />
 
       {/* Contact Section */}
       <Contact />

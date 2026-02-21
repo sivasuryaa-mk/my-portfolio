@@ -18,7 +18,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Creative Developer",
+  title: "Sivasuryaa's Portfolio",
   description:
     "A next-level, animation-rich portfolio showcasing creative development projects",
   keywords: ["portfolio", "developer", "creative", "web development", "react"],

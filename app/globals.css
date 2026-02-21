@@ -80,6 +80,35 @@ body {
   background-clip: text;
 }
 
+/* Gradient text for name */
+@layer utilities {
+  .shimmer-text {
+    background: linear-gradient(
+      90deg,
+      #a78bfa 0%,
+      #8b5cf6 25%,
+      #06b6d4 60%,
+      #22d3ee 100%
+    ) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .shimmer-text {
+    background: linear-gradient(
+      90deg,
+      #a78bfa 0%,
+      #8b5cf6 25%,
+      #06b6d4 60%,
+      #22d3ee 100%
+    ) !important;
+  }
+}
+
 /* Focus states for accessibility */
 button:focus-visible,
 a:focus-visible {
