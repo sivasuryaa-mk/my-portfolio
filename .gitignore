@@ -40,6 +40,8 @@ yarn-error.log*
 # Claude Code
 .claude/
 .mcp.json
+CLAUDE.md
+IMPLEMENTATION_PLAN.md
 
 # Screenshots (development artifacts)
 *.png
