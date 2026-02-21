@@ -10,6 +10,8 @@ interface MagneticButtonProps {
   strength?: number;
   as?: "button" | "a";
   href?: string;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 export function MagneticButton({
@@ -19,6 +21,8 @@ export function MagneticButton({
   strength = 0.3,
   as = "button",
   href,
+  type = "button",
+  disabled = false,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -45,7 +49,7 @@ export function MagneticButton({
     onMouseLeave: reset,
     animate: position,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 150,
       damping: 15,
       mass: 0.1,
@@ -69,7 +73,7 @@ export function MagneticButton({
   }
 
   return (
-    <motion.button type="button" onClick={onClick} {...motionProps}>
+    <motion.button type={type} disabled={disabled} onClick={onClick} {...motionProps}>
       {children}
     </motion.button>
   );
