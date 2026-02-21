@@ -61,19 +61,19 @@ export function GlitchText({
 
   return (
     <motion.span
-      className={`relative inline-block ${className}`}
+      className="relative inline-block"
       onMouseEnter={() => glitchOnHover && setIsGlitching(true)}
       onMouseLeave={() => glitchOnHover && !continuous && setIsGlitching(false)}
       data-cursor="pointer"
     >
-      {/* Main text */}
-      <span className="relative z-10">{displayText}</span>
+      {/* Main text - use fixed width to prevent layout shift */}
+      <span className={`relative z-10 whitespace-nowrap ${className}`}>{displayText}</span>
 
       {/* Glitch layers */}
       {isGlitching && (
         <>
           <motion.span
-            className="absolute left-0 top-0 z-0 text-accent-primary opacity-70"
+            className="absolute left-0 top-0 z-0 text-accent-primary opacity-70 pointer-events-none select-none whitespace-nowrap"
             animate={{
               x: [0, -2, 2, -1, 0],
               opacity: [0.7, 0.5, 0.8, 0.6, 0.7],
@@ -83,12 +83,12 @@ export function GlitchText({
               repeat: Infinity,
               repeatType: "reverse",
             }}
-            aria-hidden
+            aria-hidden="true"
           >
             {displayText}
           </motion.span>
           <motion.span
-            className="absolute left-0 top-0 z-0 text-accent-tertiary opacity-70"
+            className="absolute left-0 top-0 z-0 text-accent-tertiary opacity-70 pointer-events-none select-none whitespace-nowrap"
             animate={{
               x: [0, 2, -2, 1, 0],
               opacity: [0.7, 0.6, 0.8, 0.5, 0.7],
@@ -98,7 +98,7 @@ export function GlitchText({
               repeat: Infinity,
               repeatType: "reverse",
             }}
-            aria-hidden
+            aria-hidden="true"
           >
             {displayText}
           </motion.span>

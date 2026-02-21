@@ -122,3 +122,36 @@ a:focus-visible {
     display: none;
   }
 }
+
+/* Yellow Neon Glow Effect - subtle for readability */
+.neon-glow-yellow {
+  fill: #fbbf24;
+  filter: drop-shadow(0 0 2px #fbbf24) drop-shadow(0 0 4px #fde047)
+    drop-shadow(0 0 8px #facc15);
+}
+
+/* Animated pulsing glow effect - subtle */
+@keyframes neon-pulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 2px #fbbf24) drop-shadow(0 0 4px #fde047)
+      drop-shadow(0 0 8px #facc15);
+  }
+  50% {
+    filter: drop-shadow(0 0 3px #fbbf24) drop-shadow(0 0 6px #fde047)
+      drop-shadow(0 0 12px #facc15);
+  }
+}
+
+.neon-glow-yellow-animated {
+  fill: #fbbf24;
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+
+/* Respect reduced motion for neon effect */
+@media (prefers-reduced-motion: reduce) {
+  .neon-glow-yellow-animated {
+    animation: none;
+    filter: drop-shadow(0 0 2px #fbbf24) drop-shadow(0 0 4px #fde047);
+  }
+}
