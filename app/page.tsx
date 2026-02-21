@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, Brain } from "lucide-react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { personalInfo } from "@/data/portfolio-content";
@@ -31,10 +31,25 @@ const scrollToSection = (id: string) => {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 };
 
+// Swift logo SVG component
+const SwiftLogo = ({ className = "" }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M7.508 15.36a7.314 7.314 0 0 0 2.64 1.87c3.14 1.47 6.88.63 9.01-1.93-.19.14-.4.27-.61.39-2.17 1.24-4.92 1.24-7.33-.04-1.98-1.05-3.6-2.73-4.6-4.8a9.47 9.47 0 0 1-.83-2.85c1.87 2.27 4.47 4.1 7.38 5.2a14.4 14.4 0 0 0 5.74.98c-1.27-1.01-2.43-2.16-3.45-3.43-2.04-2.55-3.43-5.55-4.04-8.7a10.96 10.96 0 0 0 4.65 3.83 13.35 13.35 0 0 0 8.13 1.3c-1.8-1.4-3.36-3.08-4.6-4.97a14.8 14.8 0 0 1-2.23-5.84C21.95 3.5 24 8.14 24 13.16c0 5.99-4.86 10.84-10.84 10.84-3.93 0-7.37-2.09-9.27-5.22 1.17.69 2.38 1.23 3.61 1.58z" />
+  </svg>
+);
+
 export default function Home() {
   const [showRoles, setShowRoles] = useState(false);
   const prefersReducedMotion = useReducedMotion();
-  const roles = ["Swift Developer", "AI Engineer"];
+  const roles = [
+    { text: "Swift Developer", icon: <SwiftLogo className="w-7 h-7" /> },
+    { text: "AI Engineer", icon: <Brain className="w-7 h-7" /> },
+  ];
 
   useEffect(() => {
     // Show roles after name animation settles

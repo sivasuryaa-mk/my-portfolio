@@ -4,7 +4,7 @@
 
 export const personalInfo = {
   name: "Sivasuryaa M K",
-  title: "macOS Developer @ Gen Digital",
+  title: "macOS Developer @ Gen Digital Inc.",
   tagline: "Building Digital Experiences",
   subtitle: "CSE Graduate '25 @ CEG, Anna University",
   location: "Chennai, Tamil Nadu, India",
@@ -42,7 +42,7 @@ export const education = [
 export const experience = [
   {
     role: "Associate Software Engineer",
-    company: "Gen Digital",
+    company: "Gen Digital Inc.",
     companyDescription: "Formerly NortonLifeLock/Symantec",
     duration: "Jul 2025 – Present",
     durationText: "8 mos",
@@ -58,7 +58,7 @@ export const experience = [
   },
   {
     role: "Software Engineering Intern",
-    company: "Gen Digital",
+    company: "Gen Digital Inc.",
     companyDescription: "Formerly NortonLifeLock/Symantec",
     duration: "Jan 2025 – Jul 2025",
     durationText: "7 mos",
@@ -204,7 +204,6 @@ export const skills = {
     { name: "Python", level: 90 },
     { name: "JavaScript", level: 85 },
     { name: "Java", level: 80 },
-    { name: "C", level: 75 },
     { name: "SQL", level: 80 },
     { name: "HTML/CSS", level: 90 },
     { name: "Dart", level: 75 },
@@ -218,16 +217,13 @@ export const skills = {
   aiAndData: [
     { name: "LangChain", level: 85 },
     { name: "Prompt Engineering", level: 85 },
-    { name: "Artificial Intelligence", level: 80 },
-    { name: "Machine Learning", level: 75 },
   ],
   other: [
-    { name: "macOS Development", level: 90 },
     { name: "OOP", level: 85 },
-    { name: "Data Structures", level: 85 },
     { name: "DBMS", level: 80 },
     { name: "Git/GitHub", level: 85 },
-    { name: "Firebase", level: 80 },
+    { name: "Cursor IDE", level: 85 },
+    { name: "Claude Code", level: 85 },
   ],
 };
 
@@ -236,7 +232,7 @@ export const skillCategories = [
   {
     name: "Languages",
     icon: "Code2",
-    skills: ["Swift", "Python", "JavaScript", "Java", "C", "SQL", "HTML/CSS", "Dart"],
+    skills: ["Swift", "Python", "JavaScript", "Java", "SQL", "HTML/CSS", "Dart"],
   },
   {
     name: "Frameworks",
@@ -246,12 +242,12 @@ export const skillCategories = [
   {
     name: "AI & ML",
     icon: "Brain",
-    skills: ["LangChain", "Prompt Engineering", "Artificial Intelligence", "Machine Learning"],
+    skills: ["LangChain", "Prompt Engineering"],
   },
   {
     name: "Tools & Other",
     icon: "Wrench",
-    skills: ["macOS Development", "Git/GitHub", "Firebase", "OOP", "Data Structures", "DBMS"],
+    skills: ["Git/GitHub", "OOP", "DBMS", "Cursor IDE", "Claude Code"],
   },
 ];
 

@@ -1,11 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactNode } from "react";
 import { motion } from "framer-motion";
 import { useReducedMotion } from "@/lib/use-reduced-motion";
 
+interface RoleItem {
+  text: string;
+  icon?: ReactNode;
+}
+
 interface RollingTextProps {
-  texts: string[];
+  texts: string[] | RoleItem[];
   delay?: number;
   typingSpeed?: number;
   pauseDuration?: number;
@@ -26,12 +31,19 @@ export function RollingText({
   const [isTyping, setIsTyping] = useState(true);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const currentText = texts[currentIndex];
+  // Normalize texts to RoleItem format
+  const normalizedTexts: RoleItem[] = texts.map((item) =>
+    typeof item === "string" ? { text: item } : item
+  );
+
+  const currentItem = normalizedTexts[currentIndex];
+  const currentText = currentItem.text;
+  const currentIcon = currentItem.icon;
 
   useEffect(() => {
     if (prefersReducedMotion) {
       setIsVisible(true);
-      setDisplayedText(texts[0]);
+      setDisplayedText(normalizedTexts[0].text);
       return;
     }
 
@@ -40,7 +52,7 @@ export function RollingText({
     }, delay * 1000);
 
     return () => clearTimeout(startTimeout);
-  }, [delay, prefersReducedMotion, texts]);
+  }, [delay, prefersReducedMotion, normalizedTexts]);
 
   useEffect(() => {
     if (!isVisible || prefersReducedMotion) return;
@@ -72,35 +84,38 @@ export function RollingText({
     // Finished deleting - move to next text
     if (isDeleting && displayedText.length === 0) {
       setIsDeleting(false);
-      setCurrentIndex((prev) => (prev + 1) % texts.length);
+      setCurrentIndex((prev) => (prev + 1) % normalizedTexts.length);
     }
-  }, [isVisible, isTyping, isDeleting, displayedText, currentText, typingSpeed, pauseDuration, texts.length, prefersReducedMotion]);
+  }, [isVisible, isTyping, isDeleting, displayedText, currentText, typingSpeed, pauseDuration, normalizedTexts.length, prefersReducedMotion]);
 
   // For reduced motion, cycle through texts instantly
   useEffect(() => {
     if (!prefersReducedMotion || !isVisible) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % texts.length);
-      setDisplayedText(texts[(currentIndex + 1) % texts.length]);
+      setCurrentIndex((prev) => (prev + 1) % normalizedTexts.length);
+      setDisplayedText(normalizedTexts[(currentIndex + 1) % normalizedTexts.length].text);
     }, pauseDuration + 1000);
 
     return () => clearInterval(interval);
-  }, [prefersReducedMotion, isVisible, texts, currentIndex, pauseDuration]);
+  }, [prefersReducedMotion, isVisible, normalizedTexts, currentIndex, pauseDuration]);
 
   if (!isVisible) return null;
 
   return (
-    <span className={className}>
-      {displayedText}
-      {!prefersReducedMotion && (
-        <motion.span
-          className="inline-block w-[2px] bg-current ml-0.5"
-          animate={{ opacity: [1, 0] }}
-          transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
-          style={{ height: "1em", verticalAlign: "text-bottom" }}
-        />
-      )}
+    <span className={`inline-flex items-center gap-2 ${className}`}>
+      {currentIcon && <span className="inline-flex shrink-0">{currentIcon}</span>}
+      <span>
+        {displayedText}
+        {!prefersReducedMotion && (
+          <motion.span
+            className="inline-block w-[2px] bg-current ml-0.5"
+            animate={{ opacity: [1, 0] }}
+            transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
+            style={{ height: "1em", verticalAlign: "text-bottom" }}
+          />
+        )}
+      </span>
     </span>
   );
 }
